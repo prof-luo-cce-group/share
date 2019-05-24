@@ -1,0 +1,43 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export PATH
+
+#-----------------------------------------------------------------
+#-                       Bash Configuration
+#-                        <By Huangrui Mo>    
+#- 文件说明：此文件主要用于修正组内服务器上文件的权限设置
+#- 使用方法为：用此文件替换个人 home 目录下的 .bash_profile 文件
+#-----------------------------------------------------------------
+#- 限制所创建文件夹权限为创建者本人仅有
+umask 077
+#- 以上设置仅对未来创建有效，若需修改已创建文件夹权限，以文件夹
+#- /data/your_user_id 为例，需在 terminal 中执行如下命令：
+#- 执行如下命令检查当前状态：
+#-    ll /data
+#-    ll /data/your_user_id
+#- 显示为 "rwxrwxr-x" 表示同组人有读写执行权限，他人有读执行权限
+#- 执行如下命令进行修改：
+#-    chmod 700 /data/your_user_id
+#-    cd /data/your_user_id
+#-    find . -type d -exec chmod 700 {} \;
+#-    find . -type f -exec chmod 600 {} \;
+#- 然后执行如下命令检查是否修改成功：
+#-    ll /data
+#-    ll /data/your_user_id
+#- 显示为 "rwx-----" 表示修改成功，从此同组人及他人皆无权限
+
+#- 常用快捷方式（可根据个人需求自行添加）
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias paraview='/data/Public/paraview/bin/paraview'
+alias pvbatch='/data/Public/paraview/bin/pvbatch'
+#-----------------------------------------------------------------
